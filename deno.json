@@ -1,24 +1,31 @@
 {
-  "name": "@functions/mock",
-  "description": "Lightweight utility to generate realistic mock data for tests fast.",
-  "version": "1.1.0",
-  "license": "MIT",
-  "exports":"./mod.ts",
-  "tasks": {
-    "dev": "deno run --watch main.ts"
-  },
-  "imports": {
-    "@faker-js/faker": "npm:@faker-js/faker@^9.4.0",
-    "@std/assert": "jsr:@std/assert@1"
-  },
-  "lint": {
-    "rules": {
-      "exclude": [
-        "prefer-const",
-        "no-unused-vars",
-        "no-explicit-any",
-        "ban-types"
-      ]
-    }
-  }
+	"name": "@functions/mock",
+	"description": "Lightweight utility to generate realistic mock data for tests fast.",
+	"version": "1.1.1",
+	"license": "MIT",
+	"exports": "./mod.ts",
+	"tasks": {
+		"dev": "deno run --watch main.ts"
+	},
+	"imports": {
+		"@faker-js/faker": "npm:@faker-js/faker@^9.4.0",
+		"@std/assert": "jsr:@std/assert@1"
+	},
+	"lint": {
+		"rules": {
+			"exclude": [
+				"prefer-const",
+				"no-unused-vars",
+				"no-explicit-any",
+				"ban-types"
+			]
+		}
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 125,
+		"semiColons": false,
+		"singleQuote": true,
+		"proseWrap": "preserve"
+	}
 }

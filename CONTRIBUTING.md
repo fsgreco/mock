@@ -21,7 +21,7 @@ I've tried to set a minumum Test-Driven Development (TDD) flow. Before making an
 1. Write a failing test first
 2. Run tests to verify it fails (`deno test --watch`)
 3. Implement the minimum code to make it pass
-5. Refactor if needed
+4. Refactor if needed
 
 ## Pull Request Process
 
