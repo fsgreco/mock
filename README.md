@@ -48,35 +48,42 @@ const users = createRandomUsers(3);
 
 ### Generate Mock Data from a Generator
 
-The `getMocksFromGenerator` function preserves the types of your generator functions:
+The `getMocksFromGenerator` function lets you define your own data generation logic. You provide an object where each property is a function that generates values. You can mix and match:
+- Faker.js functions
+- Your own custom functions
+- Random value generators
+- Fixed value functions
+- Any JavaScript/TypeScript function that returns a value
 
 ```typescript
 import { getMocksFromGenerator } from "@functions/mock";
 import { faker } from "@faker-js/faker";
 
 const yourGenerator = {
+  // Use faker functions directly
   id: faker.string.uuid,
-  name: faker.person.firstName,
-  age: () => faker.number.int({ min: 18, max: 99 }),
+  // Your own random logic
+  age: () => Math.floor(Math.random() * 100),
+  // Mix calculated and faker values
+  username: () => `user_${faker.number.int(1000)}`,
+  // Fixed values
+  role: () => 'user',
+  // Complex custom logic
+  status: () => {
+    const statuses = ['active', 'inactive', 'pending'];
+    return statuses[Math.floor(Math.random() * statuses.length)];
+  }
 };
 
 const createRandomObjects = getMocksFromGenerator(yourGenerator);
-// TypeScript infers exact return types from your generator functions
+// TypeScript should infers return types from your generator functions
 const objects = createRandomObjects(5);
 // objects is typed as Array<{ id: string; name: string; age: number }>
 ```
 
+## Contributing
 
-
-### `getMocksFromGenerator`
-
-Type-safe generator that creates mock data from a predefined generator.
-
-**Parameters:**
-- `gen`: An object where keys are property names and values are functions that generate the property values. Types are automatically inferred from your generator functions.
-
-**Returns:**
-- A strongly-typed function that generates an array of mock objects with exact property types.
+This is a Test-Driven Development (TDD) project. Please read the [Contributing Guidelines](CONTRIBUTING.md) for details on development process and how to submit pull requests.
 
 ## License
 
