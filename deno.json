@@ -1,5 +1,6 @@
 {
   "name": "@functions/mock",
+  "description": "Lightweight utility to generate realistic mock data for tests fast.",
   "version": "1.0.0",
   "license": "MIT",
   "exports":"./mod.ts",
