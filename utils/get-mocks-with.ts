@@ -5,7 +5,7 @@ const uniGenerator = {
   id: faker.string.uuid,
   owner_id: faker.string.uuid,
   name: faker.person.firstName,
-  age: () => faker.number.int({ min: 18, max: 99 }),
+  age: (): number => faker.number.int({ min: 18, max: 99 }),
   username: faker.internet.username,
   email: faker.internet.email,
   avatar: faker.image.avatar,
@@ -18,13 +18,14 @@ const uniGenerator = {
 
 type Generator = typeof uniGenerator
 type GenKeys = keyof Generator
-type GetGenCallableFn = <T extends GenKeys>( props: Array<T>) => {[K in T]: Generator[K]}
+type GetGenCallableFn = <T extends GenKeys>( props: Array<T> ) => {[K in T]: Generator[K]}
 
 
 const getGenerator: GetGenCallableFn = (props) => {
 	return props.reduce((acc,curr) => ({...acc, [curr]:uniGenerator[curr]}), Object.create(null) )
 }
 
+type GetMocksCallableFn = <T extends GenKeys>(props: Array<T>) => (num:number) => Array<{[K in T]: ReturnType<Generator[K]>}>
 /**
  * Generate the random function to create your mock object/s based on a list of properties
  * It preserves type safety and autocompletion
@@ -34,7 +35,7 @@ const getGenerator: GetGenCallableFn = (props) => {
  * const createRandomUsers = generateMocksFrom(props)  
  * console.log( createRandomUsers(3) )
  */
-export const getMocksWith = <T extends GenKeys>(properties: Array<T>) => getMocksFromGenerator( getGenerator(properties) )
+export const getMocksWith: GetMocksCallableFn = (properties) => getMocksFromGenerator(getGenerator(properties))
 
 
 
