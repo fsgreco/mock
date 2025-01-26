@@ -16,7 +16,7 @@ Key features:
 ### Using Deno
 
 ```sh
-deno add @functions/mock
+deno add jsr:@functions/mock
 ```
 
 ### Using npm / pnpm / or others
