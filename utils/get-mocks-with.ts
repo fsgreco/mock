@@ -33,7 +33,8 @@ type GetMocksCallableFn = <T extends GenKeys>(p: T[]) => (n: number) => Array<{ 
  * ```ts
  * const props = ['name', 'age', 'email']
  * const createRandomUsers = generateMocksFrom(props)
- * console.log( createRandomUsers(3) ) // [{name:string, age:number, email: string}, ...]
+ * console.log( createRandomUsers(3) ) 
+ * // [ {name:string, age:number, email: string}, etc...]
  * ```
  */
 export const getMocksWith: GetMocksCallableFn = (properties) => getMocksFromGenerator(getGenerator(properties))

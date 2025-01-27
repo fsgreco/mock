@@ -1,13 +1,13 @@
 # Quick Mock Data Generator
 
-Need test data quickly? This lightweight utility helps you generate realistic mock data in seconds. Choose from common properties like names, emails, and dates, **or define your own generators**. Perfect for prototypes, tests, and demos where you need meaningful data fast.
+Need test data quickly? This utility helps you generate realistic mock data fast. Choose from common properties like names, emails, and dates, **or define your own generators**. Perfect for prototypes, tests, and demos where you need meaningful data right away.
 
 Built on top of `@faker-js/faker`, it provides a simpler interface while maintaining type safety and full TypeScript support.
 
 Key features:
 
 - 🚀 Quick property selection from common data types
-- 🎯 Generate exactly what you need, nothing more
+- 🎯 Generate exactly what you decide, nothing more
 - 📦 Zero configuration required
 - 🔍 Full TypeScript support with autocompletion
 
@@ -39,11 +39,9 @@ This basically returns a function that will create mock data based on a list of 
 ```typescript
 import { getMocksWith } from '@functions/mock'
 
-// Autosuggestion will let you pick the properties you want in your mock objects
-const createRandomUsers = getMocksWith(['name', 'age', 'email'])
-
-// Generate 3 users with only those properties
+const createRandomUsers = getMocksWith(['name', 'age', 'email']) // Autosuggestion helps you pick the props 
 const users = createRandomUsers(3)
+//[ { name:"John", age: 64, email: "random@mail.net" }, etc... ]
 ```
 
 ### Generate Mock Data from a Generator
@@ -61,13 +59,9 @@ import { getMocksFromGenerator } from '@functions/mock'
 import { faker } from '@faker-js/faker'
 
 const yourGenerator = {
-	// Use faker functions directly
 	id: faker.string.uuid,
-	// Your own random logic
 	age: () => Math.floor(Math.random() * (100 - 18 + 1)) + 18,
-	// Mix calculated and faker values
 	username: () => `user_${faker.number.int(1000)}`,
-	// Fixed values
 	role: () => 'user',
 	// Complex custom logic
 	status: () => {
@@ -77,9 +71,9 @@ const yourGenerator = {
 }
 
 const createRandomObjects = getMocksFromGenerator(yourGenerator)
-// TypeScript should infers return types from your generator functions
+// TypeScript also infers return types from your generator functions
 const objects = createRandomObjects(5)
-// objects is typed as Array<{ id: string; name: string; age: number }>
+// [{ id: '...', age: 42, username: 'user_123', role: 'user', status: 'active' },
 ```
 
 ## Contributing
